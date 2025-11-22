@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гостиница для животных "Мягкие Лапки"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #C4A8FD, #8f94fb);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #A48EBC;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #A48EBC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #110842;
+            font-size: 2.5rem;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Animals Section */
+        .animals-section {
+            background-color: #f0f4ff;
+        }
+        
+        .animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .animal-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .animal-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .animal-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .animal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .animal-card:hover .animal-image img {
+            transform: scale(1.1);
+        }
+        
+        .animal-info {
+            padding: 20px;
+        }
+        
+        .animal-info h3 {
+            color: #4e54c8;
+            margin-bottom: 10px;
+        }
+        
+        /* Registration Section */
+        .registration-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        /* Story Section */
+        .story-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .story-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .story-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        /* Первый блок - текст слева, изображение справа */
+        .story-block:first-child {
+            flex-direction: row;
+        }
+        
+        /* Остальные блоки - чередование */
+        .story-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .story-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .story-text {
+            flex: 1;
+        }
+        
+        .story-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #6a11cb;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .story-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background: #2575fc;
+        }
+        
+        .story-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .quote {
+            font-style: italic;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #6a11cb;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* Problem Section */
+        .problem-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .problem-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .problem-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .problem-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Solution Section */
+        .solution-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .solution-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .solution-text {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        
+        .solution-highlight {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6a11cb;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #2575fc;
+        }
+        
+        /* Footer */
+        footer {
+            background: #C4A8FD;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: #A48EBC;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #A48EBC;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .story-block {
+                flex-direction: column;
+            }
+            
+            .story-block:first-child {
+                flex-direction: column;
+            }
+            
+            .story-block:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                <h1>Мягкие Лапки</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="Abautus.html">О нас</a></li>
+                    <li><a href="#animals">Наши постояльцы</a></li>
+                    <li><a href="forms.html">Регистрация</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+   
+    <section class="story-section">
+        <div class="container">
+            <h2 class="section-title">Рождение идеи</h2>
+            <div class="story-container">
+                <div class="story-block">
+                    <div class="story-text">
+                        <p>Однажды вечером, листая инстаграм с фотографиями стильных коворкингов и концертов для собак, Алиса с досадой сказала:</p>
+                        <div class="quote">
+                            «Почему для нас есть все эти крутые сервисы, а для наших питомцев — один сплошной совок? Я бы за любой деньги отдала Цезаря в место, которое не напоминает казенный дом».
+                        </div>
+                        <p>Идея пришла мгновенно: создать не просто отель, а пространство премиум-класса с цифровой экосистемой. Место, которое было бы удобным не только для питомца, но и, в первую очередь, для его владельца-миллениала.</p>
+                        <h2 class="section-title">Революция в индустрии</h2>
+                        <p class="solution-text">Так родилась концепция отеля нового поколения — места, где технологии встречаются с заботой, а дизайн создает комфорт для питомцев и их владельцев.</p>
+                        <p class="solution-text">Объединив опыт в маркетинге и веб-разработке, Алиса и Лео создали не просто отель, а цифровую экосистему, где каждый аспект пребывания питомца контролируется и документируется через удобное мобильное приложение.</p>
+                    </div>
+                    <div class="story-image">
+                        <img src="https://tvkrasnodar.ru/upload/iblock/1bf/1bf293ff2123d5f0eef24665b8cf359e.jpg" alt="Момент озарения">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Animals Section -->
+    <section id="animals" class="animals-section">
+        <div class="container">
+            <h2 class="section-title">Наши постояльцы</h2>
+            <div class="animals-grid">
+                <div class="animal-card">
+                    <div class="animal-image">
+                        <img src="https://i.pinimg.com/originals/e1/c6/d7/e1c6d7e6bb2ea570d34b2c6821eb00ef.jpg" alt="Собаки">
+                    </div>
+                    <div class="animal-info">
+                        <h3>Собаки</h3>
+                        <p>Мы принимаем собак всех пород и размеров. Для каждой собаки предусмотрены индивидуальные прогулки, игры и занятия.</p>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <div class="animal-image">
+                        <img src="https://i.pinimg.com/originals/67/17/44/671744b2337fa4b1f27f3f234b2ae817.jpg" alt="Кошки">
+                    </div>
+                    <div class="animal-info">
+                        <h3>Кошки</h3>
+                        <p>Для кошек созданы уютные помещения с когтеточками, игрушками и укрытиями. Мы учитываем индивидуальные потребности каждого кота.</p>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <div class="animal-image">
+                        <img src="https://avatars.mds.yandex.net/i?id=5ef0e1a8c2814a1631090404b9ef114f_l-5505041-images-thumbs&n=13" alt="Грызуны">
+                    </div>
+                    <div class="animal-info">
+                        <h3>Грызуны</h3>
+                        <p>Мы принимаем кроликов, морских свинок, хомяков и других мелких грызунов. Для них созданы безопасные и комфортные условия.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Москва, ул. Пушкинская, д. 15</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (495) 123-45-67</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>softpaws@dom-pitomca.ru</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Пн-Вс: 7:00 - 22:00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Мы в соцсетях</h3>
+                    <p>Подписывайтесь на наши социальные сети, чтобы быть в курсе акций и новостей.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Гостиница для животных "Мягкие Лапки". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка формы
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
